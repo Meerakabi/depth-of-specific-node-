@@ -1,0 +1,25 @@
+from collections import deque
+
+def find_depth_bfs(root, target):
+    if root is None:
+        return -1  # Return -1 if the target is not found
+    
+    queue = deque([(root, 0)])  # Each element is a tuple (node, depth)
+    
+    while queue:
+        node, depth = queue.popleft()
+        
+        if node.value == target:
+            return depth
+        
+        # Add children to the queue with incremented depth
+        if node.left:
+            queue.append((node.left, depth + 1))
+        if node.right:
+            queue.append((node.right, depth + 1))
+    
+    return -1  # Target not found
+
+# Example usage:
+depth = find_depth_bfs(root, 5)
+print("Depth of node with value 5:", depth)
